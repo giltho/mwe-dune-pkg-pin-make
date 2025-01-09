@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest]
+  runs-on: ${{ matrix.os }}
+  steps:
+    - uses: actions/checkout@v4
+    - name: Install dune preview
+      run: curl -fsSL https://get.dune.build/install | sh
+    - name: lock dep
+      run: dune pkg lock
+        working-directory: ./dep
+    - name: make dep
+      run: make
+        working-directory: ./dep
+    - name: lock main
+      run: dune pkg lock
+        working-directory: ./main
+    - name: build main
+      run: dune build
+        working-directory: ./main
