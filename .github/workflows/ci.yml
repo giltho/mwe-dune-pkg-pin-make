@@ -16,13 +16,13 @@ jobs:
       run: curl -fsSL https://get.dune.build/install | sh
     - name: lock dep
       run: dune pkg lock
-        working-directory: ./dep
+      working-directory: ./dep
     - name: make dep
       run: make
-        working-directory: ./dep
+      working-directory: ./dep
     - name: lock main
       run: dune pkg lock
-        working-directory: ./main
+      working-directory: ./main
     - name: build main
       run: dune build
-        working-directory: ./main
+      working-directory: ./main
